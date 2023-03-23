@@ -1,0 +1,13 @@
+app = "xbot"
+kill_signal = "SIGINT"
+kill_timeout = 5
+primary_region = "cdg"
+processes = []
+
+[env]
+  LOG_LEVEL = "trace"
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
