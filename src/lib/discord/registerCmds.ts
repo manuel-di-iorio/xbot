@@ -1,12 +1,12 @@
-import { ChatInputCommandInteraction, REST, /*Routes,*/ SlashCommandBuilder } from "discord.js";
-import { /*DISCORD_CLIENTID, */DISCORD_TOKEN } from "../../config.js";
+import { ChatInputCommandInteraction, REST, Routes, SlashCommandBuilder } from "discord.js";
+import { DISCORD_CLIENTID, DISCORD_TOKEN } from "../../config.js";
 import { getStarterFn } from "../index.js";
-import { name as discordStarterName } from "./index.js";
+import { logger } from "../../logger.js";
 
-export const name = `${discordStarterName}.RegisterCmds`;
+export const name = `Discord.RegisterCmds`;
 
 export type Command = {
-  data: SlashCommandBuilder,
+  data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">,
   exec: (interaction: ChatInputCommandInteraction) => Promise<void>
 };
 
@@ -21,8 +21,12 @@ export const addCmd = (cmd: Command) => {
 const rest = new REST({ version: '10' }).setToken(DISCORD_TOKEN);
 
 export const start = getStarterFn(name, async () => {
+  try {
   // Register the commands against the Discord API
-  // await rest.put(Routes.applicationCommands(DISCORD_CLIENTID), {
-  //   body: Object.values(registeredCommands).map(cmd => cmd.data)
-  // });
+    await rest.put(Routes.applicationCommands(DISCORD_CLIENTID), {
+      body: Object.values(registeredCommands).map(cmd => cmd.data)
+    });
+  } catch (error) {
+    logger.error(error);
+  }
 });

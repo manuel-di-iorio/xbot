@@ -1,4 +1,7 @@
+import { AvatarModule } from "./Avatar.js";
+import { MessageStoreModule } from "./MessageStore.js";
 import { ServerNotificationsModule } from "./ServerNotifications.js";
+import { ColorModule } from "./utils/Color.js";
 
 export const modules: {
   [key: string]: {
@@ -15,3 +18,6 @@ export const addModule = (name: string, cb: () => void) => {
 };
 
 ServerNotificationsModule();
+MessageStoreModule();
+AvatarModule();
+ColorModule();

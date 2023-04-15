@@ -5,6 +5,7 @@ import { modules } from "../../modules/index.js";
 import { getStarterFn } from "../index.js";
 import { events } from "./events/index.js";
 import { interactionCreateEvent } from "./events/interactionCreate.js";
+import { start as startDiscordRegisterCmds } from "./registerCmds.js";
 
 export const name = "Discord";
 
@@ -34,6 +35,9 @@ export const start = getStarterFn(name, async () => {
   const isReady = new Promise(resolve => client.once(Events.ClientReady, () => {
     // Run the modules setup callbacks
     Object.values(modules).forEach(module => module.setup());
+
+    // Register the cmds
+    startDiscordRegisterCmds();
 
     // Setup the client events
     Object.keys(events).forEach((event) => {
