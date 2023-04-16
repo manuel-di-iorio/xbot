@@ -14,3 +14,4 @@ export const REDIS_PASSWORD = env.REDIS_PASSWORD as string;
 
 export const GENERAL_CHANNEL = env.GENERAL_CHANNEL as string;
 export const NOTIFICATIONS_CHANNEL = env.NOTIFICATIONS_CHANNEL as string;
+export const GMI_MEMBER_ROLE = env.GMI_MEMBER_ROLE as string;

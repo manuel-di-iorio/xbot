@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
-import { addCmd } from "../lib/discord/registerCmds.js";
-import { addModule } from "./index.js";
+import { addCmd } from "../../lib/discord/registerCmds.js";
+import { addModule } from "../index.js";
 
 export const AvatarModule = () => addModule("Avatar", () => {
   const data = new SlashCommandBuilder()

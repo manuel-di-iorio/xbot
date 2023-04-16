@@ -1,7 +1,9 @@
-import { AvatarModule } from "./Avatar.js";
+import { AvatarModule } from "./utils/Avatar.js";
 import { MessageStoreModule } from "./MessageStore.js";
 import { ServerNotificationsModule } from "./ServerNotifications.js";
 import { ColorModule } from "./utils/Color.js";
+import { LogoModule } from "./utils/Logo.js";
+import { AssignGmiRoleToNewActiveUsersModule } from "./AssignGmiRoleToNewActiveUsers.js";
 
 export const modules: {
   [key: string]: {
@@ -21,3 +23,5 @@ ServerNotificationsModule();
 MessageStoreModule();
 AvatarModule();
 ColorModule();
+LogoModule();
+AssignGmiRoleToNewActiveUsersModule();

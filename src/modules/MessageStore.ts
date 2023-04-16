@@ -6,6 +6,7 @@ import { MessageModel } from "../db/Message/model.js";
 import { addModule } from "./index.js";
 import { addCmd } from "../lib/discord/registerCmds.js";
 import { NEWLINE } from "../utils/newline.js";
+import { UserModel } from "../db/User/model.js";
 
 export const MessageStoreModule = () => addModule("MessageStore", () => {
   addEvent(Events.MessageCreate, async (msg) => {
@@ -22,7 +23,11 @@ export const MessageStoreModule = () => addModule("MessageStore", () => {
     }
 
     try {
-      await MessageModel.push(channelId, data);
+      await Promise.all([
+        MessageModel.push(channelId, data),
+        UserModel.increaseMsgCount(msg.author.id)
+      ]);
+
       await MessageModel.trim(channelId);
     } catch (err) {
       logger.error(err);

@@ -1,47 +1,10 @@
-import { EmbedBuilder, Events, GuildMember, TextChannel, User } from "discord.js";
+import { EmbedBuilder, Events, GuildMember } from "discord.js";
 import pretty from 'pretty-time';
-import { GENERAL_CHANNEL, NOTIFICATIONS_CHANNEL } from "../config.js";
 import { UserModel } from "../db/User/model.js";
 import { addEvent } from "../lib/discord/events/index.js";
-import { client } from "../lib/discord/index.js";
 import { logger } from "../logger.js";
-import { getAvatarTopColor } from "../utils/getAvatarTopColor.js";
 import { addModule } from "./index.js";
-
-const notifyEmbed = async (embed: EmbedBuilder) => {
-  const logLeavingUsersChannel = client.channels.cache.get(NOTIFICATIONS_CHANNEL) as TextChannel;
-  if (logLeavingUsersChannel) {
-    await logLeavingUsersChannel.send({
-      embeds: [embed]
-    });
-  }
-};
-
-const broadcast = async (embed: EmbedBuilder) => {
-  const generalChannel = client.channels.cache.get(GENERAL_CHANNEL) as TextChannel;
-  if (generalChannel) {
-    await generalChannel.send({
-      embeds: [embed]
-    });
-  }
-
-  await notifyEmbed(embed);
-};
-
-const getEmbed = async (user: User, title: string, description?: string, footer?: string) => {
-  const avatarUrl = user.displayAvatarURL({ size: 128, extension: 'png', });
-  const avatarColor = await getAvatarTopColor(user);
-
-  const embed = new EmbedBuilder()
-    .setColor(avatarColor)
-    .setThumbnail(avatarUrl)
-    .setTitle(title);
-
-  if (description) embed.setDescription(description);
-  if (footer) embed.setFooter({ text: footer });
-
-  return embed;
-};
+import { broadcastEmbed, getEmbed, notifyEmbed } from "../utils/embeds.js";
 
 export const ServerNotificationsModule = () => addModule("ServerNotifications", () => {
   // Join
@@ -89,7 +52,7 @@ export const ServerNotificationsModule = () => addModule("ServerNotifications", 
         .catch((err: Error) => logger.error(err));
     }
 
-    await broadcast(embed);
+    await broadcastEmbed(embed);
   });
 
   // Leave
@@ -108,7 +71,7 @@ export const ServerNotificationsModule = () => addModule("ServerNotifications", 
 
     const description = rolesNames ? `Ruoli: ${rolesNames}` : undefined;
     const embed = await getEmbed(member.user, `${member.displayName} ha lasciato il server`, description);
-    await broadcast(embed);
+    await broadcastEmbed(embed);
   });
 
   // Member update
@@ -131,12 +94,12 @@ export const ServerNotificationsModule = () => addModule("ServerNotifications", 
   // Ban
   addEvent(Events.GuildBanAdd, async ({ user }) => {
     const embed = await getEmbed(user, `${user.username} è stato bannato/a dal server`);
-    await broadcast(embed);
+    await broadcastEmbed(embed);
   });
 
   // Unban
   addEvent(Events.GuildBanRemove, async ({ user }) => {
     const embed = await getEmbed(user, `Il ban di ${user.username} è stato revocato`);
-    await broadcast(embed);
+    await broadcastEmbed(embed);
   });
 });

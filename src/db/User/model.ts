@@ -6,6 +6,7 @@ const getUserPath = (id: Snowflake) => `u:${id}:info`;
 
 const rolesField = 'roles';
 const kickTimeField = 'kick-time';
+const msgCountField = 'msg-count';
 
 export const UserModel = {
   // Roles
@@ -42,5 +43,9 @@ export const UserModel = {
     if (!userRedisTime) return;
     const kickTime = JSON.parse(userRedisTime);
     return process.hrtime(kickTime);
-  }
+  },
+
+  // Msg Count
+  increaseMsgCount: (id: Snowflake) => redis.hincrby(getUserPath(id), msgCountField, 1),
+  getMsgCount: (id: Snowflake) => redis.hget(getUserPath(id), msgCountField),
 };
