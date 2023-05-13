@@ -4,6 +4,10 @@ import { ServerNotificationsModule } from "./ServerNotifications.js";
 import { ColorModule } from "./utils/Color.js";
 import { LogoModule } from "./utils/Logo.js";
 import { AssignGmiRoleToNewActiveUsersModule } from "./AssignGmiRoleToNewActiveUsers.js";
+import { TranscribeVoiceMsgModule } from "./TranscribeVoiceMsg.js";
+import { WeatherModule } from "./utils/Weather.js";
+import { HoroscopeModule } from "./utils/Horoscope.js";
+import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
 
 export const modules: {
   [key: string]: {
@@ -25,3 +29,9 @@ AvatarModule();
 ColorModule();
 LogoModule();
 AssignGmiRoleToNewActiveUsersModule();
+TranscribeVoiceMsgModule();
+WeatherModule();
+HoroscopeModule();
+CompeVotesNotifsModule();
+// TwitchLiveNotif
+// PrimeBiweeklyReminder

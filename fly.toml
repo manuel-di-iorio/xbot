@@ -1,13 +1,25 @@
-app = "xbot"
-kill_signal = "SIGINT"
-kill_timeout = 5
-primary_region = "cdg"
-processes = []
+# fly.toml app configuration file generated for xbot on 2023-05-08T10:33:19+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-[env]
-  LOG_LEVEL = "trace"
+app = "xbot"
+primary_region = "cdg"
+kill_signal = "SIGINT"
+kill_timeout = "5s"
 
 [experimental]
   auto_rollback = true
 
+[env]
+  LOG_LEVEL = "trace"
+  PRIMARY_REGION = "cdg"
+
 [[services]]
+  protocol = "tcp"
+  internal_port = 8080
+  ports = []
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 25
+    soft_limit = 20

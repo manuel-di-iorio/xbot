@@ -19,6 +19,7 @@ COPY . .
 
 RUN npm install --production=false && npm run build
 FROM debian:bullseye
+RUN apt-get update; apt-get install -y ffmpeg
 
 LABEL fly_launch_runtime="nodejs"
 

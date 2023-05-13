@@ -11,7 +11,15 @@ export const DISCORD_TOKEN = env.DISCORD_TOKEN as string;
 export const REDIS_HOST = env.REDIS_HOST as string;
 export const REDIS_USER = env.REDIS_USER as string;
 export const REDIS_PASSWORD = env.REDIS_PASSWORD as string;
-
 export const GENERAL_CHANNEL = env.GENERAL_CHANNEL as string;
 export const NOTIFICATIONS_CHANNEL = env.NOTIFICATIONS_CHANNEL as string;
 export const GMI_MEMBER_ROLE = env.GMI_MEMBER_ROLE as string;
+export const GOOGLE_APIKEY = env.GOOGLE_APIKEY as string;
+export const GOOGLE_SERVICEACCOUNT = JSON.parse(Buffer.from(env.GOOGLE_SERVICEACCOUNT as string, "base64").toString("utf-8"));
+export const WITAI_APIKEY = env.WITAI_APIKEY as string;
+export const OPEN_WEATHER_MAP_APIKEY = env.OPEN_WEATHER_MAP_APIKEY as string;
+
+export const TWITCH_API_LOGIN_HOST = 'https://id.twitch.tv';
+export const TWITCH_API_HOST = 'https://api.twitch.tv/helix';
+export const BOT_COLOR = '#9c59b6';
+export const GMI_GUILD_ID = '168415550274404352';

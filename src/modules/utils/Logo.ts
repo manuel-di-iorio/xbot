@@ -1,6 +1,7 @@
-import { SlashCommandBuilder } from "discord.js";
+import { AttachmentBuilder, SlashCommandBuilder } from "discord.js";
 import { addModule } from "../index.js";
 import { addCmd } from "../../lib/discord/registerCmds.js";
+import { readFile } from "fs/promises";
 
 export const LogoModule = () => addModule("Logo", () => {
   addCmd({
@@ -14,7 +15,10 @@ export const LogoModule = () => addModule("Logo", () => {
         return;
       }
 
-      await interaction.reply(interaction.guild.iconURL({ extension: 'png', size: 512 }) || "Logo non trovato");
+      const guildImageUrl = interaction.guild.iconURL({ extension: 'png', size: 512 }) || "Logo non trovato";
+      const svgFile = await readFile("./assets/gmi_logo.svg");
+      const svgAttachment = new AttachmentBuilder(svgFile, { name: "gmi_logo.svg" });
+      await interaction.reply({ files: [guildImageUrl, svgAttachment] });
     }
   });
 });
