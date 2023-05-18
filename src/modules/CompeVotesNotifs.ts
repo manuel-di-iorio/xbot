@@ -1,9 +1,8 @@
-import { EmbedBuilder } from "discord.js";
+import { EmbedBuilder, TextChannel } from "discord.js";
 import axios, { AxiosResponse } from "axios";
 import { addModule } from "./index.js";
 import { logger } from "../logger.js";
 import { redis } from "../lib/redis/index.js";
-import { broadcastEmbed } from "../utils/embeds.js";
 import { BOT_COLOR, GMI_GUILD_ID } from "../config.js";
 import { client } from "../lib/discord/index.js";
 import { DOUBLE_NEWLINE, NEWLINE } from "../utils/newline.js";
@@ -23,16 +22,17 @@ const notifyUpdate = async (global: number, judge: string, judgeStats: number, g
   const embed = new EmbedBuilder()
     .setColor(BOT_COLOR)
     .setTitle("AGGIORNAMENTO COMPETIZIONE")
-    .setDescription(`**${judge}** ha votato **${game}**${DOUBLE_NEWLINE}Progresso voto del giudice: **${judgeStats}%**${NEWLINE}Progresso voto del gioco: **${gameStats}%**`)
+    .setDescription(`**${judge}** ha votato **${game}**${DOUBLE_NEWLINE}Progresso voti del giudice: **${judgeStats}%**${NEWLINE}Progresso voti del gioco: **${gameStats}%**`)
     .setFooter({ text: `Globale: ${global}%` });
 
-  const gmiGuildIcon = client.guilds.cache.get(GMI_GUILD_ID)?.icon;
+  const gmiGuildIcon = client.guilds.cache.get(GMI_GUILD_ID)?.iconURL({ extension: 'png', size: 256 });
   if (gmiGuildIcon) {
     embed.setThumbnail(gmiGuildIcon);
   }
 
   try {
-    await broadcastEmbed(embed);
+    const compeCh = client.channels.cache.get("1089555921954422814") as TextChannel;
+    await compeCh.send({ embeds: [embed], });
   } catch (err) {
     logger.error(err);
   }
@@ -54,7 +54,7 @@ const checkVotes = async () => {
       for (const [game, newGameStats] of Object.entries(stats.byGame)) {
         const oldGameStats = redisVotes.byGame[game];
         if (newGameStats <= oldGameStats) continue;
-        notifyUpdate(actualGlobal, judge, newVoteStats, game, newGameStats);
+        await notifyUpdate(actualGlobal, judge, newVoteStats, game, newGameStats);
         break;
       }
 

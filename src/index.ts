@@ -2,6 +2,8 @@ import { getStarterFn } from "./lib/index.js";
 import { start as startRedis } from "./lib/redis/index.js";
 // import { start as startChatGpt } from "./lib/chatgpt/index.js";
 import { start as startDiscord } from "./lib/discord/index.js";
+import { start as startScheduler } from "./lib/scheduler/index.js";
+import { start as startTwitch } from "./lib/twitch/index.js";
 import { logger } from "./logger.js";
 
 try {
@@ -13,6 +15,11 @@ try {
 
     await Promise.all([
       startDiscord()
+    ]);
+
+    await Promise.all([
+      startScheduler(),
+      startTwitch()
     ]);
   })();
 } catch (error) {

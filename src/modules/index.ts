@@ -8,6 +8,7 @@ import { TranscribeVoiceMsgModule } from "./TranscribeVoiceMsg.js";
 import { WeatherModule } from "./utils/Weather.js";
 import { HoroscopeModule } from "./utils/Horoscope.js";
 import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
+import { RemindersModule } from "./Reminders/index.js";
 
 export const modules: {
   [key: string]: {
@@ -33,5 +34,4 @@ TranscribeVoiceMsgModule();
 WeatherModule();
 HoroscopeModule();
 CompeVotesNotifsModule();
-// TwitchLiveNotif
-// PrimeBiweeklyReminder
+RemindersModule();

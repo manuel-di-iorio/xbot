@@ -20,6 +20,7 @@ export const getEmbed = async (user: User, title: string, description?: string, 
 
 export const notifyEmbed = async (embed: EmbedBuilder) => {
   const logLeavingUsersChannel = client.channels.cache.get(NOTIFICATIONS_CHANNEL) as TextChannel;
+
   if (logLeavingUsersChannel) {
     await logLeavingUsersChannel.send({
       embeds: [embed]
@@ -29,9 +30,10 @@ export const notifyEmbed = async (embed: EmbedBuilder) => {
 
 export const broadcastEmbed = async (embed: EmbedBuilder) => {
   const generalChannel = client.channels.cache.get(GENERAL_CHANNEL) as TextChannel;
+
   if (generalChannel) {
     await generalChannel.send({
-      embeds: [embed]
+      embeds: [embed],
     });
   }
 
