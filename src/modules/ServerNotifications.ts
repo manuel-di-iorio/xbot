@@ -1,6 +1,6 @@
 import { EmbedBuilder, Events, GuildMember } from "discord.js";
 import pretty from 'pretty-time';
-import { UserModel } from "../db/User/model.js";
+import { UserModel } from "../db/User.js";
 import { addEvent } from "../lib/discord/events/index.js";
 import { logger } from "../logger.js";
 import { addModule } from "./index.js";

@@ -14,7 +14,7 @@ type StreamInfo = {
 
 export const name = "Twitch";
 let headers: AxiosRequestConfig | undefined;
-const liveCheckTimeout = 1000 * 60;
+const liveCheckTimeout = 1000 * 60 * 3;
 const refreshAccessTokenTimeout = 1000 * 60 * 3;
 const canCheckLiveTimeout = 1000 * 60 * 60;
 let canCheckLive = true;

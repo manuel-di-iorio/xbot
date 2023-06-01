@@ -45,6 +45,24 @@ const checkVotes = async () => {
     const actualGlobal = stats.global;
     if (actualGlobal === redisVotes.global) return;
 
+    if (actualGlobal === 100) {
+      redisVotes = stats;
+      await redis.set(redisKey, JSON.stringify(stats));
+
+      const embed = new EmbedBuilder()
+        .setColor(BOT_COLOR)
+        .setTitle("AGGIORNAMENTO COMPETIZIONE")
+        .setDescription(`Le votazioni sono concluse, complimenti a tutti per la partecipazione! Ci vediamo questa sera in live su${NEWLINE}**https://www.twitch.tv/gamemakeritalia**`);
+
+      const gmiGuildIcon = client.guilds.cache.get(GMI_GUILD_ID)?.iconURL({ extension: 'png', size: 256 });
+      if (gmiGuildIcon) {
+        embed.setThumbnail(gmiGuildIcon);
+      }
+      const compeCh = client.channels.cache.get("1089555921954422814") as TextChannel;
+      await compeCh.send({ embeds: [embed], });
+      return;
+    }
+
     // Find the updated judge vote percentage
     for (const [judge, newVoteStats] of Object.entries(stats.byJudge)) {
       const oldVoteStats = redisVotes.byJudge[judge];
@@ -54,6 +72,7 @@ const checkVotes = async () => {
       for (const [game, newGameStats] of Object.entries(stats.byGame)) {
         const oldGameStats = redisVotes.byGame[game];
         if (newGameStats <= oldGameStats) continue;
+
         await notifyUpdate(actualGlobal, judge, newVoteStats, game, newGameStats);
         break;
       }

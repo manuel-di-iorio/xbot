@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, TextChannel } from "discord.js";
 import moment from 'moment';
-// import 'moment-timezone';
+import 'moment-timezone';
 import { addCmd } from "../../lib/discord/registerCmds.js";
 import { parseNaturalDate } from "../../utils/parseNaturalDate.js";
 import { randomBytes } from "crypto";

@@ -4,7 +4,7 @@ import { addEvent } from "./index.js";
 
 export const interactionCreateEvent = () => {
   addEvent(Events.InteractionCreate, async (interaction: Interaction) => {
-    if (!interaction.isChatInputCommand()) return;
+    if (!interaction.isChatInputCommand() && !interaction.isMessageContextMenuCommand()) return;
 
     const cmd = registeredCommands[interaction.commandName];
 

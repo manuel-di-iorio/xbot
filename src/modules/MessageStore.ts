@@ -2,11 +2,11 @@ import { AttachmentBuilder, Events, SlashCommandBuilder } from "discord.js";
 import moment from 'moment';
 import { logger } from "../logger.js";
 import { addEvent } from "../lib/discord/events/index.js";
-import { MessageModel } from "../db/Message/model.js";
+import { MessageModel } from "../db/Message.js";
 import { addModule } from "./index.js";
 import { addCmd } from "../lib/discord/registerCmds.js";
 import { NEWLINE } from "../utils/newline.js";
-import { UserModel } from "../db/User/model.js";
+import { UserModel } from "../db/User.js";
 
 export const MessageStoreModule = () => addModule("MessageStore", () => {
   addEvent(Events.MessageCreate, async (msg) => {

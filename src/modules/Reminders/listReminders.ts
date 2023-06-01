@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, Snowflake } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder, Snowflake } from "discord.js";
 import moment from "moment";
 import { addCmd } from "../../lib/discord/registerCmds.js";
 import { redis } from "../../lib/redis/index.js";
@@ -15,9 +15,11 @@ export const listReminders = () => {
       .setDescription("Mostra i reminder impostati"),
 
     exec: async (interaction) => {
+      const msg = interaction as ChatInputCommandInteraction;
+
       const reminders = await redis.hgetall('reminders');
       if (!reminders || !Object.keys(reminders).length) {
-        await interaction.reply('Non ci sono reminders salvati');
+        await msg.reply('Non ci sono reminders salvati');
         return;
       }
 
@@ -32,13 +34,13 @@ export const listReminders = () => {
         const user = client.users.cache.get(reminder.usr as Snowflake);
         const prettyDate = moment(new Date(reminder.exp)).format('DD/MM/YYYY [alle] HH:mm:ss');
 
-        remindersText += `\`\`\`Creato da ${getUserDisplayName(interaction, user?.id)} con scadenza ${prettyDate} (ID: ${id}) 
+        remindersText += `\`\`\`Creato da ${getUserDisplayName(msg, user?.id)} con scadenza ${prettyDate} (ID: ${id}) 
 ‟${reminder.msg}”
 \`\`\`
 `;
       }
 
-      await interaction.reply(`Lista dei reminders:    
+      await msg.reply(`Lista dei reminders:    
 ${remindersText}`);
     }
   });

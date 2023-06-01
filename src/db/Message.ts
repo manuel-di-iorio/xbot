@@ -1,4 +1,4 @@
-import { redis } from "../../lib/redis/index.js";
+import { redis } from "../lib/redis/index.js";
 
 const channelField = "c";
 const msgField = "msg";

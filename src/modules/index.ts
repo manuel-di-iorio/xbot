@@ -7,8 +7,9 @@ import { AssignGmiRoleToNewActiveUsersModule } from "./AssignGmiRoleToNewActiveU
 import { TranscribeVoiceMsgModule } from "./TranscribeVoiceMsg.js";
 import { WeatherModule } from "./utils/Weather.js";
 import { HoroscopeModule } from "./utils/Horoscope.js";
-import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
-import { RemindersModule } from "./Reminders/index.js";
+import { CtxMenuThreadModule } from "./CtxMenuThread.js";
+// import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
+// import { RemindersModule } from "./Reminders/index.js";
 
 export const modules: {
   [key: string]: {
@@ -33,5 +34,6 @@ AssignGmiRoleToNewActiveUsersModule();
 TranscribeVoiceMsgModule();
 WeatherModule();
 HoroscopeModule();
-CompeVotesNotifsModule();
-RemindersModule();
+CtxMenuThreadModule();
+// CompeVotesNotifsModule();
+//RemindersModule();

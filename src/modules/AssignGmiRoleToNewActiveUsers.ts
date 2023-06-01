@@ -2,7 +2,7 @@ import { Events, RoleResolvable, Snowflake } from "discord.js";
 import { logger } from "../logger.js";
 import { addEvent } from "../lib/discord/events/index.js";
 import { addModule } from "./index.js";
-import { UserModel } from "../db/User/model.js";
+import { UserModel } from "../db/User.js";
 import { GMI_MEMBER_ROLE } from "../config.js";
 import { broadcastEmbed, getEmbed } from "../utils/embeds.js";
 

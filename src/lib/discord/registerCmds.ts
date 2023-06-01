@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, REST, Routes, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, ContextMenuCommandBuilder, ContextMenuCommandInteraction, REST, Routes, SlashCommandBuilder } from "discord.js";
 import { DISCORD_CLIENTID, DISCORD_TOKEN } from "../../config.js";
 import { getStarterFn } from "../index.js";
 import { logger } from "../../logger.js";
@@ -6,8 +6,8 @@ import { logger } from "../../logger.js";
 export const name = `Discord.RegisterCmds`;
 
 export type Command = {
-  data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">,
-  exec: (interaction: ChatInputCommandInteraction) => Promise<void>
+  data: ContextMenuCommandBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">,
+  exec: (interaction: ChatInputCommandInteraction | ContextMenuCommandInteraction) => Promise<void>
 };
 
 export const registeredCommands: {

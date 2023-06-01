@@ -1,6 +1,6 @@
 import { GuildMember, RoleResolvable, Snowflake } from "discord.js";
-import { redis } from "../../lib/redis/index.js";
-import { logger } from "../../logger.js";
+import { redis } from "../lib/redis/index.js";
+import { logger } from "../logger.js";
 
 const getUserPath = (id: Snowflake) => `u:${id}:info`;
 
