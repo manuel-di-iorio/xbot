@@ -1,5 +1,4 @@
 // Context menu commands for thread owners
-
 import { ApplicationCommandType, ContextMenuCommandBuilder, MessageContextMenuCommandInteraction, PublicThreadChannel } from "discord.js";
 import { addCmd } from "../lib/discord/registerCmds.js";
 import { addModule } from "./index.js";

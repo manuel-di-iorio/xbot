@@ -8,6 +8,7 @@ import { TranscribeVoiceMsgModule } from "./TranscribeVoiceMsg.js";
 import { WeatherModule } from "./utils/Weather.js";
 import { HoroscopeModule } from "./utils/Horoscope.js";
 import { CtxMenuThreadModule } from "./CtxMenuThread.js";
+import { CodeModule } from "./utils/Code.js";
 // import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
 // import { RemindersModule } from "./Reminders/index.js";
 
@@ -35,5 +36,6 @@ TranscribeVoiceMsgModule();
 WeatherModule();
 HoroscopeModule();
 CtxMenuThreadModule();
+CodeModule();
 // CompeVotesNotifsModule();
 //RemindersModule();
