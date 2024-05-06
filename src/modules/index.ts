@@ -9,7 +9,7 @@ import { WeatherModule } from "./utils/Weather.js";
 import { HoroscopeModule } from "./utils/Horoscope.js";
 import { CtxMenuThreadModule } from "./CtxMenuThread.js";
 import { CodeModule } from "./utils/Code.js";
-// import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
+import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
 // import { RemindersModule } from "./Reminders/index.js";
 
 export const modules: {
@@ -37,5 +37,5 @@ WeatherModule();
 HoroscopeModule();
 CtxMenuThreadModule();
 CodeModule();
-// CompeVotesNotifsModule();
+CompeVotesNotifsModule();
 //RemindersModule();

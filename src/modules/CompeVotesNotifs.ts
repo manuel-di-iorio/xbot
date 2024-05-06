@@ -16,6 +16,7 @@ type Stats = {
 let redisVotes: Stats = { global: 0, byJudge: {}, byGame: {} };
 
 const redisKey = "compe-votes-stats";
+const compeChId = "1191780970089689108";
 
 const notifyUpdate = async (global: number, judge: string, judgeStats: number, game: string, gameStats: number) => {
   // Notify the embed
@@ -31,7 +32,7 @@ const notifyUpdate = async (global: number, judge: string, judgeStats: number, g
   }
 
   try {
-    const compeCh = client.channels.cache.get("1089555921954422814") as TextChannel;
+    const compeCh = client.channels.cache.get(compeChId) as TextChannel;
     await compeCh.send({ embeds: [embed], });
   } catch (err) {
     logger.error(err);
@@ -58,7 +59,7 @@ const checkVotes = async () => {
       if (gmiGuildIcon) {
         embed.setThumbnail(gmiGuildIcon);
       }
-      const compeCh = client.channels.cache.get("1089555921954422814") as TextChannel;
+      const compeCh = client.channels.cache.get(compeChId) as TextChannel;
       await compeCh.send({ embeds: [embed], });
       return;
     }
