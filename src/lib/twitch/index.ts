@@ -24,6 +24,8 @@ let latestLiveTitle: string;
  * Get the new access token
  */
 const getAccessToken = async () => {
+  if (!TWITCH_CLIENT_ID) return;
+
   try {
     const { data: { access_token: accessToken } } = await axios.post(`${TWITCH_API_LOGIN_HOST}/oauth2/token?client_id=${TWITCH_CLIENT_ID}&client_secret=${TWITCH_SECRET}&grant_type=client_credentials`);
 
@@ -41,6 +43,8 @@ const getAccessToken = async () => {
 };
 
 const getStreamInfo = async () => {
+  if (!TWITCH_CLIENT_ID) return;
+  
   try {
     const response: AxiosResponse<{ data: [StreamInfo] }> = await axios(`${TWITCH_API_HOST}/streams?user_id=${TWITCH_USER_ID}`, headers);
     const { data: { data: streams } } = response;

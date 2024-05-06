@@ -41,7 +41,7 @@ const notifyUpdate = async (global: number, judge: string, judgeStats: number, g
 
 const checkVotes = async () => {
   try {
-    const response: AxiosResponse<{ stats: Stats }> = await axios("https://gmitalia.altervista.org/api/stats.php?ctx=20");
+    const response: AxiosResponse<{ stats: Stats }> = await axios("https://gmitalia.altervista.org/api/stats.php?ctx=26");
     const { data: { stats } } = response;
     const actualGlobal = stats.global;
     if (actualGlobal === redisVotes.global) return;
@@ -65,20 +65,22 @@ const checkVotes = async () => {
     }
 
     // Find the updated judge vote percentage
-    for (const [judge, newVoteStats] of Object.entries(stats.byJudge)) {
-      const oldVoteStats = redisVotes.byJudge[judge];
-      if (newVoteStats <= oldVoteStats) continue;
+    if (redisVotes.byJudge && Object.values(redisVotes.byJudge).length) {
+      for (const [judge, newVoteStats] of Object.entries(stats.byJudge)) {
+        const oldVoteStats = redisVotes.byJudge[judge];
+        if (newVoteStats <= oldVoteStats) continue;
 
-      // Find the updated game
-      for (const [game, newGameStats] of Object.entries(stats.byGame)) {
-        const oldGameStats = redisVotes.byGame[game];
-        if (newGameStats <= oldGameStats) continue;
+        // Find the updated game
+        for (const [game, newGameStats] of Object.entries(stats.byGame)) {
+          const oldGameStats = redisVotes.byGame[game];
+          if (newGameStats <= oldGameStats) continue;
 
-        await notifyUpdate(actualGlobal, judge, newVoteStats, game, newGameStats);
+          await notifyUpdate(actualGlobal, judge, newVoteStats, game, newGameStats);
+          break;
+        }
+
         break;
       }
-
-      break;
     }
 
     redisVotes = stats;
