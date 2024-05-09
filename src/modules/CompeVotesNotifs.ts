@@ -53,7 +53,7 @@ const checkVotes = async () => {
       const embed = new EmbedBuilder()
         .setColor(BOT_COLOR)
         .setTitle("AGGIORNAMENTO COMPETIZIONE")
-        .setDescription(`Le votazioni sono concluse, complimenti a tutti per la partecipazione! Ci vediamo questa sera in live su${NEWLINE}**https://www.twitch.tv/gamemakeritalia**`);
+        .setDescription(`Le votazioni sono concluse, complimenti a tutti per la partecipazione! Ci vediamo presto in live su${NEWLINE}**https://www.twitch.tv/gamemakeritalia**`);
 
       const gmiGuildIcon = client.guilds.cache.get(GMI_GUILD_ID)?.iconURL({ extension: 'png', size: 256 });
       if (gmiGuildIcon) {
