@@ -4,12 +4,11 @@ import { ServerNotificationsModule } from "./ServerNotifications.js";
 import { ColorModule } from "./utils/Color.js";
 import { LogoModule } from "./utils/Logo.js";
 import { AssignGmiRoleToNewActiveUsersModule } from "./AssignGmiRoleToNewActiveUsers.js";
-import { TranscribeVoiceMsgModule } from "./TranscribeVoiceMsg.js";
+// import { TranscribeVoiceMsgModule } from "./TranscribeVoiceMsg.js";
 import { WeatherModule } from "./utils/Weather.js";
 import { HoroscopeModule } from "./utils/Horoscope.js";
 import { CtxMenuThreadModule } from "./CtxMenuThread.js";
 import { CodeModule } from "./utils/Code.js";
-import { CompeVotesNotifsModule } from "./CompeVotesNotifs.js";
 // import { RemindersModule } from "./Reminders/index.js";
 
 export const modules: {
@@ -32,10 +31,10 @@ AvatarModule();
 ColorModule();
 LogoModule();
 AssignGmiRoleToNewActiveUsersModule();
-TranscribeVoiceMsgModule();
+// TranscribeVoiceMsgModule();
 WeatherModule();
 HoroscopeModule();
 CtxMenuThreadModule();
 CodeModule();
-CompeVotesNotifsModule();
+// CompeVotesNotifsModule();
 //RemindersModule();
