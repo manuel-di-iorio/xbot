@@ -37,6 +37,7 @@ const extractWeatherData = (data: OpenWeatherDataStep, response: OpenWeatherResp
 
 export const WeatherModule = () => addModule("Weather", () => {
   addCmd({
+    // @ts-expect-error Will be fixed in a newer version
     data: new SlashCommandBuilder()
       .setName("weather")
       .setDescription("Mostra il meteo della tua città")

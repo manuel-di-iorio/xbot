@@ -1,5 +1,4 @@
 import { ColorResolvable, User } from "discord.js";
-// @ts-expect-error no ts definitions
 import ColorThief from 'colorthief';
 import { logger } from "../logger.js";
 

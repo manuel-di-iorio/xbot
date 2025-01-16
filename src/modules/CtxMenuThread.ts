@@ -8,6 +8,7 @@ export const CtxMenuThreadModule = () => addModule("CtxMenuThread", () => {
   addCmd({
     data: new ContextMenuCommandBuilder()
       .setName('Elimina messaggio')
+       // @ts-expect-error Will be fixed in a newer version
       .setType(ApplicationCommandType.Message),
 
     exec: async (interaction) => {
@@ -34,6 +35,7 @@ export const CtxMenuThreadModule = () => addModule("CtxMenuThread", () => {
   addCmd({
     data: new ContextMenuCommandBuilder()
       .setName('Pinna o unpinna')
+      // @ts-expect-error Will be fixed in a newer version
       .setType(ApplicationCommandType.Message),
 
     exec: async (interaction) => {

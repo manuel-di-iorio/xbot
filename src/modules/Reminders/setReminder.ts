@@ -10,6 +10,7 @@ moment.locale('it');
 
 export const setReminder = () => {
   addCmd({
+    // @ts-expect-error Will be fixed in a newer version
     data: new SlashCommandBuilder()
       .setName("remind")
       .setDescription("Setta un reminder")

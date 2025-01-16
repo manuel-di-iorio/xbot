@@ -9,6 +9,7 @@ export const AvatarModule = () => addModule("Avatar", () => {
     .addUserOption((option) => option.setName("user").setDescription("Utente di cui mostrare l'avatar"));
 
   addCmd({
+    // @ts-expect-error Will be fixed in a newer version
     data,
 
     exec: async (interaction) => {

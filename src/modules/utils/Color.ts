@@ -5,6 +5,7 @@ import { addCmd } from "../../lib/discord/registerCmds.js";
 
 export const ColorModule = () => addModule("Color", () => {
   addCmd({
+    // @ts-expect-error Will be fixed in a newer version
     data: new SlashCommandBuilder()
       .setName("color")
       .setDescription("Mostra il colore indicato")

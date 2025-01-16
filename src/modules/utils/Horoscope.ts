@@ -10,6 +10,7 @@ const HTML_SELECTOR = '.c-article-section.j-article-section.c-article-section--s
 
 export const HoroscopeModule = () => addModule("Horoscope", () => {
   addCmd({
+    // @ts-expect-error Will be fixed in a newer version
     data: new SlashCommandBuilder()
       .setName("horoscope")
       .setDescription("Mostra l'oroscopo del giorno per il tuo segno")

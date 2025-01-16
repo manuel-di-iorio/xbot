@@ -4,6 +4,7 @@ import { redis } from "../../lib/redis/index.js";
 
 export const delReminder = () => {
   addCmd({
+    // @ts-expect-error Will be fixed in a newer version
     data: new SlashCommandBuilder()
       .setName("remind_del")
       .setDescription("Cancella un reminder")
